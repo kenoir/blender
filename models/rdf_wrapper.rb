@@ -1,13 +1,16 @@
 class RDFWrapper
-
-	attr :uri
+	require 'rest_client'
+	
+	attr_accessor :uri, :rest_client	
 	
 	def initialize(uri)
-		@uri = uri	
+		@uri = uri
+		@rest_client = RestClient
 	end
 	
 	def getData
-		return IO.read(@uri)
+		response = @rest_client.get(@uri)
+		response
 	end
 
 end
