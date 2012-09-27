@@ -6,6 +6,10 @@ Feature: Blender service
 	Scenario: Requesting an RDF resource
 	  When I request a RDF resource URI
 	  Then I will get valid RDF XML back
+	  
+	Scenario: Requesting an Event RDF resource
+	  When I request an Event RDF resource URI
+	  Then I will get an Event RDF XML data
 	
 	 
 	
