@@ -1,7 +1,6 @@
 describe IndexController do
 
-  subject { IndexController.new }
-  
+  subject { IndexController.new(resource_uri) }
 
   describe IndexController, "#initialize" do
     it 'should create and set a RDF wrapper model object' do

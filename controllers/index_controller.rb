@@ -2,8 +2,8 @@ class IndexController
   
   attr :rdf_wrapper
   
-  def initialize
-  	@rdf_wrapper = RDFWrapper.new(request.request_uri)  	
+  def initialize(resource_uri)
+  	@rdf_wrapper = RDFWrapper.new(resource_uri)  	
   end
   
   def run!
