@@ -1,0 +1,2 @@
+default: --format pretty -t ~@big -t ~@wip
+focus: --format pretty -t @now

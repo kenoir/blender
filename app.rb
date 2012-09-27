@@ -21,10 +21,9 @@ class Application < Sinatra::Base
   }
 
   get '/rdf' do
-    #index_controller = IndexController.new
-    #@rdfxml = index_controller.run!
-    content_type 'application/rdf+xml'    
-    return IO.read('data/test/sample.rdfxml')
+    resource_uri = params[:identifier]
+    index_controller = IndexController.new(resource_uri)
+    @rdfxml = index_controller.run!
   end
 
 end
