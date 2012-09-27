@@ -1,12 +1,10 @@
 describe RDFWrapper do
 
-    dummy_uri = 'data/test/sample.rdfxml'
-
-	subject {RDFWrapper.new(dummy_uri)}
+	subject {RDFWrapper.new(dummy_resource_uri)}
 	
 	describe RDFWrapper, "#initialize" do
 	  it 'should set an internal reference to the resource URI' do
-	      subject.uri.should be dummy_uri
+	      subject.uri.should eq dummy_resource_uri
 	  end
 	end
 	

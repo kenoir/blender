@@ -1,6 +1,6 @@
 describe IndexController do
 
-  subject { IndexController.new(resource_uri) }
+  subject { IndexController.new(dummy_resource_uri) }
 
   describe IndexController, "#initialize" do
     it 'should create and set a RDF wrapper model object' do
@@ -11,8 +11,9 @@ describe IndexController do
   
   describe IndexController, "#run!" do 
     it 'should return a RDF string representation of the resource data' do
-    	pending
-    	subject.run!	
+    	rdf_data = subject.run!
+    	options = { :validate => true }
+	    RDF::Reader.for(:rdfxml).new(rdf_data, options)
     end
   end
 

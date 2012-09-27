@@ -25,6 +25,10 @@ def dummy_RDF
   IO.read(dummy_rdf_file_location)
 end
 
+def dummy_resource_uri
+  'data/test/sample.rdfxml'
+end
+
 def resource_uri
   'http://www.example.com'
 end
