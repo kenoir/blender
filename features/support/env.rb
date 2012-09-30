@@ -10,10 +10,11 @@ require File.join(File.dirname(__FILE__), '..', '..', 'app.rb')
 require File.join(File.dirname(__FILE__), '..', '..', 'webmock','helpers.rb')
 require File.join(File.dirname(__FILE__), 'blender_helpers.rb')
 
+include RDF
 include WebmockHelpers
+
 World(WebMock::API, WebMock::Matchers)
 WebMock.allow_net_connect!
-
 World(BlenderHelpers)
 
 Capybara.app = Application

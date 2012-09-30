@@ -15,6 +15,7 @@ Feature: Blender service
 	  When I request an Event RDF resource URI
 	  Then I should get an Event RDF XML data
 	  Then I should get an Event name
+	  Then I should get an Event description
 	
 	
 	 

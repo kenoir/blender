@@ -25,7 +25,11 @@ Then /^I should get an Event RDF XML data$/ do
 end
 
 Then /^I should get an Event name$/ do
-	rdf_should_contain_a_name
+	rdf_should_contain_a_label	
+end
+
+Then /^I should get an Event description$/ do
+	rdf_should_contain_a_description
 end
 
 

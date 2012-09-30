@@ -10,7 +10,7 @@ class RDFLoader
 	
 	def getData
 		response = @rest_client.get(@uri)
-		#response = @rest_client.get @uri, {:accept => :rdf+xml}		
+		#response = @rest_client.get @uri, {:accept => :rdf+xml}
 	end
 	
 	def getHttpClient
