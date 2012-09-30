@@ -1,14 +1,20 @@
 require 'capybara'
 require 'capybara/cucumber'
-require 'rest-assured'
 require 'rspec'
+require 'webmock/rspec'
 require 'rest-client'
 require 'rdf'
 require 'rdf/rdfxml'
 
-include RDF
-
 require File.join(File.dirname(__FILE__), '..', '..', 'app.rb')
+require File.join(File.dirname(__FILE__), '..', '..', 'webmock','helpers.rb')
+require File.join(File.dirname(__FILE__), 'blender_helpers.rb')
+
+include WebmockHelpers
+World(WebMock::API, WebMock::Matchers)
+WebMock.allow_net_connect!
+
+World(BlenderHelpers)
 
 Capybara.app = Application
 

@@ -1,33 +1,22 @@
 require './app'
 require 'rack/test'
+require 'webmock/rspec'
 require 'rdf'
 require 'rdf/rdfxml'
-require 'rest_client'
 require 'pp'
 
-require_relative '../rest-assured/helpers.rb'
+require_relative '../models/rdf_loader.rb'
+require_relative '../webmock/helpers.rb'
 
-include RestAssuredHelpers
+include WebmockHelpers
 include RDF
-
-#start_test_api
-
-def dummy_rest_client
-  if defined? @dummy_rest_client 
-    return @dummy_rest_client 
-  end
-
-  dummy_response = double('response')
-  dummy_response.stub(:to_str).and_return(event_rdf_resource)
-
-  
-  @dummy_rest_client = double('RestClient')
-  @dummy_rest_client.stub(:get).and_return(dummy_response)
-
-  @dummy_rest_client
-end
-
 
 def app
   Application 
+end
+
+def mock_loader
+	rdfLoaderMock = mock(RDFLoader)
+	rdfLoaderMock.stub!(:getData).and_return(stub_response_body)
+	rdfLoaderMock
 end
