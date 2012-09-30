@@ -16,11 +16,7 @@ describe RDFLoader do
 	
 	describe RDFLoader, "#getData" do
 		it 'should get data from a given URL' do
-    		
-    		@rdfLoaderMock = mock(RDFLoader)
-    		@rdfLoaderMock.stub!(:getData).and_return(stub_response_body)
-    		
-    		rdf_data = @rdfLoaderMock.getData    		
+			rdf_data = mock_loader.getData    		
     		options = { :validate => true }
     		RDF::Reader.for(:rdfxml).new(rdf_data, options)    		
     		clear_stub_request

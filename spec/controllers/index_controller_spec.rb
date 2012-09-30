@@ -11,12 +11,8 @@ describe IndexController do
   end  
   
   describe IndexController, "#run!" do 
-    it 'should return a RDF string representation of the resource data' do
-        		
-    	@rdfLoaderMock = mock(RDFLoader)
-    	@rdfLoaderMock.stub!(:getData).and_return(stub_response_body)    	
-    	subject.rdf_loader = @rdfLoaderMock
-    	   	
+    it 'should return a RDF string representation of the resource data' do    	    	
+    	subject.rdf_loader = mock_loader    	   	
     	rdf_data = subject.run!    	
     	options = { :validate => true }
 	    RDF::Reader.for(:rdfxml).new(rdf_data, options)
