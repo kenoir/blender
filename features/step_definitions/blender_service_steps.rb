@@ -1,34 +1,31 @@
+When /^I make a request$/ do
+	visit '/rdf?identifier=http://someresource'
+end
+
+Then /^I should get a successful response$/ do
+	response_should_be_valid
+end
+
+
 When /^I request a RDF resource URI$/ do
-  visit '/rdf?identifier=http://someresource.that.does.not.exist'
+	visit '/rdf?identifier=http://someresource'
 end
 
-Then /^I will get valid RDF XML back$/ do
-  pending
-  page.driver.response.status.should == 200    
-  response = page.driver.response.body
-  options = { :validate => true }  
-  RDF::Reader.for(:rdfxml).new(response,options)
+Then /^I should get valid RDF XML back$/ do  
+	data_should_be_valid_rdf_xml 
 end
-
 
 
 When /^I request an Event RDF resource URI$/ do
-  visit '/rdf?identifier=http://juicer.responsivenews.co.uk/events/18'
+	visit '/rdf?identifier=http://juicer.responsivenews.co.uk/events/18'
 end
 
-Then /^I will get an Event RDF XML data$/ do
-  pending  
-  response = page.driver.response.body  
-  rdf_graph = RDF::Graph.new()
-  RDF::Reader.for(:rdfxml).new(response) do |reader|
-      reader.each_statement do |statement|
-          rdf_graph.insert(statement)
-      end
-  end  
-  query = RDF::Query.new(
-      {:content => {RDF.label => :name} }  
-  )  
-  solutions = query.execute(rdf_graph)  
-  solutions.should_not be_empty  
-  
+Then /^I should get an Event RDF XML data$/ do   
+	rdf_should_contain_statements 
 end
+
+Then /^I should get an Event name$/ do
+	rdf_should_contain_a_name
+end
+
+

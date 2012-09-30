@@ -1,2 +1,6 @@
 rest-assured.log
 rest-assured.db
+.buildpath
+.project
+.settings/
+.gitignore
