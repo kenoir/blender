@@ -6,7 +6,7 @@ describe 'Application' do
   end
 
   it "should provide RDF endpoint" do
-    get "/rdf?indentifier=http://juicer.responsivenews.co.uk/events/18"
+    get "/rdf?indentifier=#{event_uri}"
     @stub_request.response.status.should == [200,""]
   end
 

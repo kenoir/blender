@@ -17,11 +17,11 @@ module WebmockHelpers
   end
 
   def juicer_rdf_endpoint
-    'http://juicer.responsivenews.co.uk/rdf?indentifier='
+    "http://juicer.responsivenews.co.uk/rdf?indentifier="
   end
 
   def event_uri
-    'http://juicer.responsivenews.co.uk/events/18'
+    "http://juicer.responsivenews.co.uk/events/18"
   end
 
   def juicer_rdf_event_endpoint
