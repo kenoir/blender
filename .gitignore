@@ -4,3 +4,4 @@ rest-assured.db
 .project
 .settings/
 .gitignore
+coverage
