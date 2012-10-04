@@ -21,9 +21,8 @@ class Application < Sinatra::Base
   }
 
   get '/rdf' do
-    resource_uri = params[:identifier]
+    resource_uri = params["identifier"]
     index_controller = IndexController.new(resource_uri)
     @rdfxml = index_controller.run!
   end
-
 end
