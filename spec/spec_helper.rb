@@ -1,3 +1,5 @@
+require 'simplecov'
+
 require './app'
 require 'rack/test'
 require 'webmock/rspec'
