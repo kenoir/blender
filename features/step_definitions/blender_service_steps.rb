@@ -24,6 +24,7 @@ Then /^I should get valid Event data$/ do
 	rdf_should_contain_statements
 	rdf_should_contain_a_label
 	rdf_should_contain_a_description
+	pending
 	rdf_should_contain_an_image
 end
 

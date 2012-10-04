@@ -35,7 +35,3 @@ Feature: Blender service
 	  	When I request a Person's related Articles resource URI
 	  	Then I should get valid data for each of the Person's related Articles
 	  
-	
-	
-	 
-	
