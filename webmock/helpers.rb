@@ -21,7 +21,8 @@ module WebmockHelpers
 	end
 	
 	def event_api_endpoint
-	    "/rdf?identifier=#{event_uri}"
+	    #"/rdf?identifier=#{event_uri}"
+	    "/rdf?identifier=http://someresource"
 	end	
 		
 	def my_stub_request    
