@@ -16,7 +16,6 @@ include RDF
 include WebmockHelpers
 
 World(WebMock::API, WebMock::Matchers)
-WebMock.allow_net_connect!
 World(BlenderHelpers)
 
 Capybara.app = Application
