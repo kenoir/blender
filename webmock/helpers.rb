@@ -1,5 +1,4 @@
 module WebmockHelpers
-
   require 'rdf'
   require 'rdf/rdfxml'
 
