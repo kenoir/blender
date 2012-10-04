@@ -6,7 +6,7 @@ describe 'Application' do
   end
   
   it "should provide RDF endpoint" do
-    get '/rdf?identifier=http://someresource'
+    get "http://some.uri.that.possibly.just.maybe.does.not.exist"
     @stub_request.response.status.should == "200"
   end
   

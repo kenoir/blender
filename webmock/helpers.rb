@@ -22,7 +22,7 @@ module WebmockHelpers
 	
 	def event_api_endpoint
 	    #"/rdf?identifier=#{event_uri}"
-	    "/rdf?identifier=http://someresource"
+	    "http://some.uri.that.possibly.just.maybe.does.not.exist"
 	end	
 		
 	def my_stub_request    
