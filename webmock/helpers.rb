@@ -16,7 +16,7 @@ module WebmockHelpers
   end
 
   def juicer_rdf_endpoint
-    "http://juicer.responsivenews.co.uk/rdf?indentifier="
+    "http://juicer.responsivenews.co.uk/rdf?identifier="
   end
 
   def event_uri
@@ -38,7 +38,6 @@ module WebmockHelpers
           :status => 200, 
           :body => stub_event_rdf, 
           :headers => {})
-
   end
 
   def config_stub_request

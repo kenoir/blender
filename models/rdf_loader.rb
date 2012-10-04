@@ -16,7 +16,7 @@ class RDFLoader
   end
 
   def juicer_rdf_uri(uri)
-    "http://juicer.responsivenews.co.uk/rdf?indentifier=#{uri}" 
+    "http://juicer.responsivenews.co.uk/rdf?identifier=#{uri}" 
   end
 
 end

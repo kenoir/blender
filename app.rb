@@ -25,5 +25,4 @@ class Application < Sinatra::Base
     index_controller = IndexController.new(resource_uri)
     @rdfxml = index_controller.run!
   end
-
 end

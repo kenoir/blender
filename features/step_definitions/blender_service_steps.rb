@@ -1,5 +1,5 @@
 When /^I make a request$/ do
-  visit '/rdf?identifier=http://someresource'
+  visit "/rdf?identifier=#{event_uri}"
 end
 
 Then /^I should get a successful response$/ do
