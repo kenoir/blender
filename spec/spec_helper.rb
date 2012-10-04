@@ -18,7 +18,7 @@ def app
 end
 
 def mock_loader
-	rdfLoaderMock = mock(RDFLoader)
-	rdfLoaderMock.stub!(:getData).and_return(stub_response_body)
-	rdfLoaderMock
+  rdfLoaderMock = mock(RDFLoader)
+  rdfLoaderMock.stub(:get_data).and_return(stub_event_rdf)
+  rdfLoaderMock
 end

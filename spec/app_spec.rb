@@ -1,13 +1,17 @@
 describe 'Application' do
   include Rack::Test::Methods
-  
+
   before (:each) do
-  	@stub_request = my_stub_request
+    @stub_request = stub_juicer_rdf_event_endpoint
   end
-  
+
   it "should provide RDF endpoint" do
-    get "http://some.uri.that.possibly.just.maybe.does.not.exist"
-    @stub_request.response.status.should == "200"
+    get "/rdf?indentifier=#{event_uri}"
+    @stub_request.response.status.should == [200,""]
   end
-  
+
+  after(:all) do
+    clear_stub_requests
+  end
+
 end
