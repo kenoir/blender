@@ -26,7 +26,6 @@ module WebmockHelpers
 
   def juicer_rdf_event_endpoint
     "#{juicer_rdf_endpoint}#{event_uri}" 
-    "http://juicer.responsivenews.co.uk/rdf?indentifier=http://juicer.responsivenews.co.uk/events/18"
   end	
 
   def stub_juicer_rdf_event_endpoint   
