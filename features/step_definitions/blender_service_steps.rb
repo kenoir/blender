@@ -7,7 +7,7 @@ Then /^I should get a successful response$/ do
 end
 
 When /^I request a RDF resource URI$/ do
-  visit '/rdf?identifier=http://someresource'
+  visit "/rdf?identifier=#{event_uri}"
 end
 
 Then /^I should get valid RDF back$/ do  
