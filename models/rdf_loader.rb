@@ -6,6 +6,10 @@ class RDFLoader
 
   def initialize(uri,rest_client = RestClient)
     @uri = uri
+
+    if not ENV['http_proxy'].nil?
+      rest_client.proxy = ENV['http_proxy']
+    end
     @rest_client = rest_client 
   end
 
