@@ -1,3 +1,5 @@
+require_relative('../mixin/cacheable.rb')
+
 class RDFLoader
   require 'rest_client'
 
