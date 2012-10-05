@@ -1,6 +1,8 @@
 class RDFLoader
   require 'rest_client'
 
+  include Cacheable
+
   attr :rest_client
   attr :uri
 
@@ -14,9 +16,10 @@ class RDFLoader
   end
 
   def get_data
-    response = @rest_client.get(
-      juicer_rdf_uri(@uri), 
-      { :accept => "application/rdf+xml" })
+    response = cache(@uri) {
+      @rest_client.get(juicer_rdf_uri(@uri), 
+        { :accept => "application/rdf+xml" })
+    }
   end
 
   def juicer_rdf_uri(uri)
