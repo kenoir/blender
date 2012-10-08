@@ -4,14 +4,17 @@ module BlenderHelpers
     response.status.should == 200
   end
 
+
   def response_should_be_valid_rdf_xml(response)
     options = { :validate => true }  
     RDF::Reader.for(:rdfxml).new(response.body, options)	
   end
 
+
   def rdf_should_be_of_type_event
 
   end
+
 
   def rdf_should_contain_a_label(graph)		
     query = {
@@ -28,6 +31,7 @@ module BlenderHelpers
     name.should_not be_empty
   end
 
+
   def rdf_should_contain_a_description(graph)
     query = {
       DC.abstract => :description
@@ -42,6 +46,7 @@ module BlenderHelpers
     end
     description.should_not be_empty		
   end
+  
 
   def request_rdf_graph(path)
     path.strip!    
@@ -54,6 +59,7 @@ module BlenderHelpers
 
   def rdf_graph(response)
     graph = RDF::Graph.new()
+    
     RDF::Reader.for(:rdfxml).new(response.body) do |reader|
       reader.each_statement do |statement|
         graph.insert(statement)
