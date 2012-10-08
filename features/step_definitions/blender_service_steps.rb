@@ -1,22 +1,21 @@
 When /^I request$/ do |path|
     @rdf_graph = request_rdf_graph(path)
+    @response = last_response
 end
 
 Then /^I should get valid RDF back$/ do  
-  response_should_be_valid
-  data_should_be_valid_rdf_xml 
+  response_should_be_ok(@response)
+  response_should_be_valid_rdf_xml(@response)
 end
 
 Then /^I should get valid Event data$/ do
-  response_should_be_valid
-  data_should_be_valid_rdf_xml 
-
-  pending
-
-  #rdf_should_be_of_type_event
-  rdf_should_contain_statements
-  rdf_should_contain_a_label
-  rdf_should_contain_a_description
+  response_should_be_ok(@response)
+  response_should_be_valid_rdf_xml(@response)
+    
+  rdf_should_contain_a_label(@rdf_graph)
+  rdf_should_contain_a_description(@rdf_graph)
+  
+  #rdf_should_be_of_type_event  
   #rdf_should_contain_an_image
 end
 

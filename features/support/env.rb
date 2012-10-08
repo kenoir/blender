@@ -1,12 +1,12 @@
 require 'simplecov'
 
-require 'capybara'
-require 'capybara/cucumber'
 require 'rspec'
-require 'webmock/rspec'
+require 'webmock/cucumber'
+require 'rack/test'
 require 'rest-client'
 require 'rdf'
 require 'rdf/rdfxml'
+
 
 require File.join(File.dirname(__FILE__), '..', '..', 'app.rb')
 require File.join(File.dirname(__FILE__), '..', '..', 'webmock','helpers.rb')
@@ -18,14 +18,24 @@ include WebmockHelpers
 World(WebMock::API, WebMock::Matchers)
 World(BlenderHelpers)
 
-Capybara.app = Application
+
 
 class ApplicationWorld
-  include Capybara::DSL
+
   include RSpec::Expectations
   include RSpec::Matchers
 end
 
 World do
-  ApplicationWorld.new
+	def app
+		@app = Rack::Builder.new do
+			run Application
+		end
+	end    
+    
+    include Rack::Test::Methods
+    
+    ApplicationWorld.new
 end
+
+

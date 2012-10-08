@@ -3,6 +3,7 @@ Feature: Blender service
   I want to receive RDF XML that describes a specific resource
   In order to undertand the relationship between the resource and others
 
+  @juicer_event
   Scenario: Requesting a RDF resource
     When I request
       """
@@ -10,6 +11,7 @@ Feature: Blender service
       """
     Then I should get valid RDF back
 
+  @juicer_event
   Scenario: Requesting an Event
     When I request 
       """

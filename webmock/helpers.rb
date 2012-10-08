@@ -35,16 +35,16 @@ module WebmockHelpers
     "#{juicer_rdf_endpoint}#{event_uri}" 
   end	
 
-  def stub_juicer_rdf_event_endpoint   
+  def stub_rdf_endpoint(endpoint, rdf)
     config_stub_request
-    stub_request(:get, juicer_rdf_event_endpoint).
+    stub_request(:get, endpoint).
       with(:headers => {
       'Accept'=>'application/rdf+xml', 
       'Accept-Encoding'=>'gzip, deflate', 
       'User-Agent'=>'Ruby'}).
         to_return(
           :status => 200, 
-          :body => stub_event_rdf, 
+          :body => rdf, 
           :headers => {})
   end
 
