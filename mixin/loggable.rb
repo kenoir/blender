@@ -1,6 +1,10 @@
 module Loggable
 
   def log(title,e)
+    if Application.environment.to_s == "development"
+      return
+    end
+
     puts "\n"
     puts "----------------------------------------------------------------\n"
     puts "#{title}\n"

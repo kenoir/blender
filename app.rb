@@ -8,6 +8,7 @@ Dir.glob("mixin/*.rb").each { |r| require_relative r }
 Dir.glob("models/*.rb").each { |r| require_relative r }
 
 class Application < Sinatra::Base
+  set :env, ENV['RACK_ENV']
   set :logging, :true
   set :cache, Dalli::Client.new(
     ENV['MEMCACHE_SERVERS'], 
