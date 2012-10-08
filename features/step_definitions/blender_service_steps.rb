@@ -1,34 +1,23 @@
-When /^I make a request$/ do
-  visit "/rdf?identifier=#{event_uri}"
-end
-
-Then /^I should get a successful response$/ do
-  response_should_be_valid
-end
-
-When /^I request a RDF resource URI$/ do
-  visit "/rdf?identifier=#{event_uri}"
+When /^I request$/ do |path|
+    @rdf_graph = request_rdf_graph(path)
 end
 
 Then /^I should get valid RDF back$/ do  
+  response_should_be_valid
   data_should_be_valid_rdf_xml 
 end
 
-When /^I request an Event's resource URI$/ do
-  visit '/rdf?identifier=http://juicer.responsivenews.co.uk/events/18'
-end
+Then /^I should get valid Event data$/ do
+  response_should_be_valid
+  data_should_be_valid_rdf_xml 
 
-Then /^I should get valid Event data$/ do   
+  pending
+
+  #rdf_should_be_of_type_event
   rdf_should_contain_statements
   rdf_should_contain_a_label
   rdf_should_contain_a_description
-  pending
-  rdf_should_contain_an_image
-end
-
-When /^I request an Event's related Articles resource URI$/ do
-  pending 
-  # visit this end point URI
+  #rdf_should_contain_an_image
 end
 
 Then /^I should get valid data for each of the Event's related Articles$/ do
@@ -36,12 +25,6 @@ Then /^I should get valid data for each of the Event's related Articles$/ do
   # I should get all related Articles
   # I should get each related Article's title
   # I should get each related Article's URI
-end
-
-
-When /^I request an Event's related People resource URI$/ do
-  pending 
-  # visit this end point URI
 end
 
 Then /^I should get valid data for each related Person$/ do
@@ -53,12 +36,6 @@ Then /^I should get valid data for each related Person$/ do
   # I should get each related Person's profile URI
 end
 
-
-When /^I request an Event's related Places resource URI$/ do
-  pending 
-  # visit this end point URI
-end
-
 Then /^I should get valid data for each related Place$/ do
   pending 
   # I should get all related Place
@@ -67,24 +44,12 @@ Then /^I should get valid data for each related Place$/ do
   # I should get each related Place's longitude
 end
 
-
-When /^I request an Event's related Programmes resource URI$/ do
-  pending 
-  # visit this end point
-end
-
 Then /^I should get valid data for each related Programme$/ do
   pending 
   # I should get all related Programmes
   # I should get each related Programme's title
   # I should get each related Programme's URI
   # I should get each related Programme's thumbnail
-end
-
-
-When /^I request a Person's related Articles resource URI$/ do
-  pending 
-  # visit this end point
 end
 
 Then /^I should get valid data for each of the Person's related Articles$/ do

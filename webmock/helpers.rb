@@ -19,8 +19,16 @@ module WebmockHelpers
     "http://juicer.responsivenews.co.uk/rdf?identifier="
   end
 
+  def person_id
+    1
+  end
+
+  def event_id
+    18
+  end
+
   def event_uri
-    "http://juicer.responsivenews.co.uk/events/18"
+    "http://juicer.responsivenews.co.uk/events/#{event_id}"
   end
 
   def juicer_rdf_event_endpoint

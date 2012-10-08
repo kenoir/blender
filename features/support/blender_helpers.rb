@@ -13,6 +13,10 @@ module BlenderHelpers
     mock_rdf_graph.count.should > 0 
   end
 
+  def rdf_should_be_of_type_event
+
+  end
+
   def rdf_should_contain_a_label		
     name = ''
     if query_solutions.count > 0
@@ -33,14 +37,23 @@ module BlenderHelpers
     description.should_not be_empty		
   end
 
-  def mock_rdf_graph
-    rdf_graph = RDF::Graph.new()
+  def request_rdf_graph(path)
+    path.strip!
+    visit eval("\"#{path}\"")
+
+    rdf_graph
+  end
+
+
+  def rdf_graph
+    graph = RDF::Graph.new()
     RDF::Reader.for(:rdfxml).new(@stub_request.response.body) do |reader|
       reader.each_statement do |statement|
-        rdf_graph.insert(statement)
+        graph.insert(statement)
       end
     end
-    rdf_graph
+
+    graph
   end
 
   def query_solutions
