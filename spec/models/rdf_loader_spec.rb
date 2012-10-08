@@ -14,7 +14,8 @@ describe RDFLoader do
 
   describe RDFLoader, "#get_data" do
     it 'should get valid data for a given URL' do
-      stub_juicer_rdf_event_endpoint
+
+      stub_rdf_endpoint(juicer_rdf_event_endpoint,stub_event_rdf) 
 
       rdf_data =  subject.get_data
       options = { :validate => true }
