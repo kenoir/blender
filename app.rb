@@ -21,13 +21,21 @@ class Application < Sinatra::Base
     full_yaml_config[Application.environment.to_s]
   }
 
+  set :controller, Proc.new {
+    ResourceController.new
+  }
+
   get '/rdf' do
-    resource_uri = params["identifier"]
-    index_controller = IndexController.new(resource_uri)
-    @rdfxml = index_controller.run!
+    id = params["identifier"]
+    @rdfxml = Application.controller.get(:identifier,id)
   end
 
-  get '/events/:id' do
-    
+  get '/events/:id' do | id |
+    @rdfxml = Application.controller.get(:event,id)
   end
+
+  get '/articles/:id' do | id |
+    @rdfxml = Application.controller.get(:article,id)
+  end
+
 end

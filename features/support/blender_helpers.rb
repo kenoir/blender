@@ -18,7 +18,7 @@ module BlenderHelpers
       RDFS.label => :name
     }
     name = ''
-	solutions = query_solutions(graph, query)
+    solutions = query_solutions(graph, query)
 
     if solutions.count > 0
       solution_hash = solutions.first.to_hash
@@ -46,11 +46,10 @@ module BlenderHelpers
   def request_rdf_graph(path)
     path.strip!    
     eval_path = eval("\"#{path}\"")
-    
+
     get(eval_path)
     rdf_graph(last_response)
   end
-
 
   def rdf_graph(response)
     graph = RDF::Graph.new()
@@ -59,7 +58,6 @@ module BlenderHelpers
         graph.insert(statement)
       end
     end
-
     graph
   end
 

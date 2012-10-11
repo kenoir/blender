@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+  xmlns="http://www.w3.org/2006/time#"
+  xmlns:tzont="http://www.w3.org/2006/timezone#"
+  xmlns:tl="http://purl.org/NET/c4dm/timeline.owl#"
+  xmlns:geo-pos="http://www.w3.org/2003/01/geo/wgs84_pos#"
+  xmlns:umbel-ac="http://umbel.org/umbel/ac/"
+  xmlns:time="http://www.w3.org/2006/time#"
+  xmlns:sw-vocab="http://www.w3.org/2003/06/sw-vocab-status/ns#"
+  xmlns:ff="http://factforge.net/"
+  xmlns:event="http://purl.org/NET/c4dm/event.owl#"
+  xmlns:music-ont="http://purl.org/ontology/mo/"
+  xmlns:olo="http://purl.org/ontology/olo/core#"
+  xmlns:opencyc-en="http://sw.opencyc.org/2008/06/10/concept/en/"
+  xmlns:om="http://www.ontotext.com/owlim/"
+  xmlns:dc-term="http://purl.org/dc/terms/"
+  xmlns:factbook="http://www.daml.org/2001/12/factbook/factbook-ont#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:pext="http://proton.semanticweb.org/protonext#"
+  xmlns:ot="http://www.ontotext.com/"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:yago="http://mpii.de/yago/resource/"
+  xmlns:stories="http://purl.org/ontology/stories/"
+  xmlns:umbel="http://umbel.org/umbel#"
+  xmlns:pkm="http://proton.semanticweb.org/protonkm#"
+  xmlns:wordnet16="http://xmlns.com/wordnet/1.6/"
+  xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xmlns:po="http://purl.org/ontology/po/"
+  xmlns:wordnet="http://www.w3.org/2006/03/wn/wn20/instances/"
+  xmlns:gr="http://purl.org/goodrelations/v1#"
+  xmlns:opencyc="http://sw.opencyc.org/concept/"
+  xmlns:wordn-sc="http://www.w3.org/2006/03/wn/wn20/schema/"
+  xmlns:nytimes="http://data.nytimes.com/"
+  xmlns:dbp-prop="http://dbpedia.org/property/"
+  xmlns:geonames="http://sws.geonames.org/"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:dbpedia="http://dbpedia.org/resource/"
+  xmlns:oasis="http://psi.oasis-open.org/iso/639/#"
+  xmlns:geo-ont="http://www.geonames.org/ontology#"
+  xmlns:umbel-en="http://umbel.org/umbel/ne/wikipedia/"
+  xmlns:ptop="http://proton.semanticweb.org/protontop#"
+  xmlns:lingvoj="http://www.lingvoj.org/ontology#"
+  xmlns:pns="http://data.press.net/ontology/stuff/"
+  xmlns:pnt="http://data.press.net/ontology/tag/"
+  xmlns:fb="http://rdf.freebase.com/ns/"
+  xmlns:dbtune="http://dbtune.org/bbc/peel/work/"
+  xmlns:psys="http://proton.semanticweb.org/protonsys#"
+  xmlns:umbel-sc="http://umbel.org/umbel/sc/"
+  xmlns:pni="http://data.press.net/ontology/identifier/"
+  xmlns:dbp-ont="http://dbpedia.org/ontology/"
+  xmlns:ub="http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xmlns:pnc="http://data.press.net/ontology/classification/"
+  xmlns:pne="http://data.press.net/ontology/event/"
+  xmlns:rel="http://purl.org/vocab/relationship"
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:pna="http://data.press.net/ontology/asset/">
+
+<rdf:Description rdf:about="http://www.bbc.co.uk/news/world-asia-19485798">
+  <rdf:type rdf:resource="http://www.bbc.co.uk/ontologies/asset/Story"/>
+  <rdf:type rdf:resource="http://data.press.net/ontology/tag/Taggable"/>
+  <dc-term:title xml:lang="en">Fugitive Vietnam shipping boss held</dc-term:title>
+  <dc-term:description xml:lang="en">Vietnam says the former chairman of a major state shipping company has been arrested abroad for economic crimes and extradited home.</dc-term:description>
+  <dc-term:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2012-09-05T08:47:12Z</dc-term:created>
+  <dc-term:subject xml:lang="en">Asia</dc-term:subject>
+  <dc-term:identifier>19485798</dc-term:identifier>
+  <dc-term:publisher rdf:resource="http://www.bbc.co.uk/news/"/>
+  <pnt:about rdf:resource="http://dbpedia.org/resource/Vietnam"/>
+  <pnt:mentions rdf:resource="http://dbpedia.org/resource/BBC"/>
+  <pnt:mentions rdf:resource="http://dbpedia.org/resource/Interpol_%28band%29"/>
+  <pnt:mentions rdf:resource="http://dbpedia.org/resource/Vinashin"/>
+  <pnt:mentions rdf:resource="http://dbpedia.org/resource/Nguyen_Tan_Dung"/>
+  <pnt:isTaggedWith rdf:resource="http://dbpedia.org/resource/BBC"/>
+  <pnt:isTaggedWith rdf:resource="http://dbpedia.org/resource/Interpol_%28band%29"/>
+  <pnt:isTaggedWith rdf:resource="http://dbpedia.org/resource/Vinashin"/>
+  <pnt:isTaggedWith rdf:resource="http://dbpedia.org/resource/Vietnam"/>
+  <pnt:isTaggedWith rdf:resource="http://dbpedia.org/resource/Nguyen_Tan_Dung"/>
+</rdf:Description>
+
+</rdf:RDF>

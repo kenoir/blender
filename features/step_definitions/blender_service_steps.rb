@@ -22,6 +22,13 @@ Then /^I should get valid Event data$/ do
   #rdf_should_contain_an_image
 end
 
+Then /^I should get valid Article data$/ do
+  response_should_be_ok(@response)
+  response_should_be_valid_rdf_xml(@response)
+
+  pending
+end
+
 Then /^I should get valid data for each of the Event's related Articles$/ do
   pending
   # I should get all related Articles

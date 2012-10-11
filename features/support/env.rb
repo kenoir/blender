@@ -18,24 +18,21 @@ include WebmockHelpers
 World(WebMock::API, WebMock::Matchers)
 World(BlenderHelpers)
 
-
-
 class ApplicationWorld
-
   include RSpec::Expectations
   include RSpec::Matchers
 end
 
 World do
-	def app
-		@app = Rack::Builder.new do
-			run Application
-		end
-	end    
-    
-    include Rack::Test::Methods
-    
-    ApplicationWorld.new
+  def app
+    @app = Rack::Builder.new do
+      run Application
+    end
+  end    
+
+  include Rack::Test::Methods
+
+  ApplicationWorld.new
 end
 
 

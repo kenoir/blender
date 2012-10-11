@@ -11,12 +11,36 @@ module WebmockHelpers
     File.join(File.dirname(__FILE__), '/data/event_resource.rdfxml')
   end
 
+  def stub_article_json_file_location
+    File.join(File.dirname(__FILE__), '/data/article_resource.json')
+  end
+
+  def stub_article_rdfxml_file_location
+    File.join(File.dirname(__FILE__), '/data/article_resource.rdfxml')
+  end
+
   def stub_event_rdf
     read_from_file(stub_event_file_location)
   end
 
+  def stub_article_rdfxml
+    read_from_file(stub_article_rdfxml_file_location)
+  end
+
+  def stub_article_json
+    read_from_file(stub_article_json_file_location)
+  end
+
   def juicer_rdf_endpoint
     "http://juicer.responsivenews.co.uk/rdf?identifier="
+  end
+
+  def article_uri
+    "http://www.bbc.co.uk/news/#{article_id}"
+  end
+
+  def article_id
+    1
   end
 
   def person_id
@@ -24,7 +48,7 @@ module WebmockHelpers
   end
 
   def event_id
-    18
+    1
   end
 
   def event_uri
@@ -35,16 +59,24 @@ module WebmockHelpers
     "#{juicer_rdf_endpoint}#{event_uri}" 
   end	
 
-  def stub_rdf_endpoint(endpoint, rdf)
+  def juicer_rdfxml_article_endpoint
+    "#{juicer_rdf_endpoint}#{article_uri}" 
+  end
+
+  def juicer_json_article_endpoint
+    "http://juicer.responsivenews.co.uk/articles/#{article_id}.json"
+  end
+
+  def stub_endpoint(endpoint, response, accept)
     config_stub_request
     stub_request(:get, endpoint).
       with(:headers => {
-      'Accept'=>'application/rdf+xml', 
+      'Accept'=> accept, 
       'Accept-Encoding'=>'gzip, deflate', 
       'User-Agent'=>'Ruby'}).
         to_return(
           :status => 200, 
-          :body => rdf, 
+          :body => response, 
           :headers => {})
   end
 
