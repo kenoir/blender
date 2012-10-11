@@ -5,3 +5,4 @@ rest-assured.db
 .settings/
 .gitignore
 coverage
+features/target/

@@ -11,6 +11,14 @@ Feature: Blender service
       """
     Then I should get valid RDF back
 
+	@juicer_article
+  Scenario: Requesting an Article
+    When I request
+   		"""
+			/articles/#{article_id}
+			"""
+		Then I should get valid Article data
+
   @juicer_event
   Scenario: Requesting an Event
     When I request 

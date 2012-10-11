@@ -1,27 +1,17 @@
-require_relative('../mixin/cacheable.rb')
+require_relative('resource_loader.rb')
 
-class RDFLoader
-  require 'rest_client'
+class JuicerRDFLoader < ResourceLoader
 
-  include Cacheable
-
-  attr :rest_client
-  attr :uri
-
-  def initialize(uri,rest_client = RestClient)
-    @uri = uri
-
-    if not ENV['http_proxy'].nil?
-      rest_client.proxy = ENV['http_proxy']
-    end
-    @rest_client = rest_client 
+  def get_identifer(id)
+    get( juicer_rdf_uri(id), {:accept => "application/rdf+xml"} ) 
   end
 
-  def get_data
-    response = cache(@uri) {
-      @rest_client.get(juicer_rdf_uri(@uri), 
-        { :accept => "application/rdf+xml" })
-    }
+  def get_event(id)
+    get( juicer_rdf_uri(juicer_event_uri(id)), {:accept => "application/rdf+xml"})
+  end
+
+  def juicer_event_uri(id)
+    "http://juicer.responsivenews.co.uk/events/#{id}"
   end
 
   def juicer_rdf_uri(uri)

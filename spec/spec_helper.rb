@@ -1,6 +1,5 @@
 require 'simplecov'
 
-require_relative '../models/rdf_loader.rb'
 require_relative '../webmock/helpers.rb'
 
 include WebmockHelpers
