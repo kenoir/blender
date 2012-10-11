@@ -11,20 +11,32 @@ module WebmockHelpers
     File.join(File.dirname(__FILE__), '/data/event_resource.rdfxml')
   end
 
-  def stub_article_file_location
+  def stub_article_json_file_location
     File.join(File.dirname(__FILE__), '/data/article_resource.json')
+  end
+
+  def stub_article_rdfxml_file_location
+    File.join(File.dirname(__FILE__), '/data/article_resource.rdfxml')
   end
 
   def stub_event_rdf
     read_from_file(stub_event_file_location)
   end
 
+  def stub_article_rdfxml
+    read_from_file(stub_article_rdfxml_file_location)
+  end
+
   def stub_article_json
-    read_from_file(stub_article_file_location)
+    read_from_file(stub_article_json_file_location)
   end
 
   def juicer_rdf_endpoint
     "http://juicer.responsivenews.co.uk/rdf?identifier="
+  end
+
+  def article_uri
+    "http://www.bbc.co.uk/news/#{article_id}"
   end
 
   def article_id
@@ -46,6 +58,10 @@ module WebmockHelpers
   def juicer_rdf_event_endpoint
     "#{juicer_rdf_endpoint}#{event_uri}" 
   end	
+
+  def juicer_rdfxml_article_endpoint
+    "#{juicer_rdf_endpoint}#{article_uri}" 
+  end
 
   def juicer_json_article_endpoint
     "http://juicer.responsivenews.co.uk/articles/#{article_id}.json"
