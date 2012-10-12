@@ -38,14 +38,34 @@ class Blender
 
   private 
   def insert_json_into_graph(rdf_graph,json)
-    # placeholder for json requests
+    parsed_json = JSON.parse(json)
+    subject_uri = RDF::URI.new(parsed_json["article"]["url"])
+
+    title_uri = RDF::URI.new("http://purl.org/dc/terms/title")
+    description_uri = RDF::URI.new("http://purl.org/dc/terms/abstract") 
+    image_uri = RDF::URI.new("http://purl.org/dc/dcmitype/Image")
+
+    title = parsed_json["article"]["title"] 
+    description = parsed_json["article"]["description"]
+    image = parsed_json["article"]["image"]["origin"] 
+
     triples = [
-      { 
-        :subject => RDF::URI.new('http://www.example.com'),
-        :predicate => RDF::URI.new('http://www.example.com'),
-        :object => RDF::URI.new('http://www.example.com')
+      {
+        :subject => subject_uri,        
+        :predicate => title_uri,        
+        :object => RDF::Literal.new(title)
+      },
+      {
+        :subject => subject_uri,        
+        :predicate => description_uri,  
+        :object => RDF::Literal.new(description)
+      },
+      {
+        :subject => subject_uri,        
+        :predicate => image_uri,        
+        :object => RDF::URI.new(image)  
       }
-    ]
+    ] 
 
     append_triples(rdf_graph,triples)
   end

@@ -11,20 +11,22 @@ end
 Then /^I should get valid Event data$/ do
   response_should_be_ok(@response)
   response_should_be_valid_rdf_xml(@response)
-    
-  rdf_should_contain_a_label(@rdf_graph)
-  rdf_should_contain_a_description(@rdf_graph)
+  
+  rdf_should_contain(@rdf_graph,{RDFS.label => :name},:name)
+  rdf_should_contain(@rdf_graph,{DC.abstract => :description},:description)
   
   #rdf_should_be_of_type_event  
   #rdf_should_contain_statements
   #rdf_should_contain_a_label
-  #rdf_should_contain_a_description
   #rdf_should_contain_an_image
 end
 
 Then /^I should get valid Article data$/ do
   response_should_be_ok(@response)
   response_should_be_valid_rdf_xml(@response)
+
+  rdf_should_contain(@rdf_graph,{DC.abstract => :description},:description)
+  rdf_should_contain(@rdf_graph,{DC.title => :title},:title)
 
   pending
 end
