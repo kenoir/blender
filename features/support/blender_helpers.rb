@@ -9,38 +9,16 @@ module BlenderHelpers
     RDF::Reader.for(:rdfxml).new(response.body, options)	
   end
 
-  def rdf_should_be_of_type_event
-
-  end
-
-  def rdf_should_contain_a_label(graph)		
-    query = {
-      RDFS.label => :name
-    }
-    name = ''
+  def rdf_should_contain(graph,query,key)
+    value = ''
     solutions = query_solutions(graph, query)
 
     if solutions.count > 0
       solution_hash = solutions.first.to_hash
-      name = solution_hash[:name]
-      name = name.value
+      value = solution_hash[key]
+      value = value.value
     end
-    name.should_not be_empty
-  end
-
-  def rdf_should_contain_a_description(graph)
-    query = {
-      DC.abstract => :description
-    }
-    description = ''    
-    solutions = query_solutions(graph, query)
-    
-    if solutions.count > 0
-      solution_hash = solutions.first.to_hash
-      description = solution_hash[:description]
-      description = description.value
-    end
-    description.should_not be_empty		
+    value.should_not be_empty
   end
 
   def request_rdf_graph(path)
@@ -65,16 +43,6 @@ module BlenderHelpers
     query = RDF::Query.new(:content => query)
     solutions = query.execute(graph)
     solutions
-  end
-
-  # Little debug helper
-  # TODO: Move to a debug helper module
-  def print_solutions(graph,query)
-    query_solutions(graph,query).each do |solution|
-      solution.each_value do |value|
-        puts 'VALUE EQUALS ' + value.inspect
-      end
-    end
   end
 
 end
