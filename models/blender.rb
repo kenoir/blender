@@ -45,9 +45,15 @@ class Blender
     description_uri = RDF::URI.new("http://purl.org/dc/terms/abstract") 
     image_uri = RDF::URI.new("http://purl.org/dc/dcmitype/Image")
 
-    title = parsed_json["article"]["title"] 
-    description = parsed_json["article"]["description"]
-    image = parsed_json["article"]["image"]["origin"] 
+    title = description = image = ""
+
+    begin
+      title = parsed_json["article"]["title"] 
+      description = parsed_json["article"]["description"]
+      image = parsed_json["article"]["image"]["origin"] 
+    rescue Exception => e
+      log("Could not parse json: #{parsed_json}",e)
+    end
 
     triples = [
       {
