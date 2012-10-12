@@ -55,6 +55,9 @@ class Blender
       log("Could not parse json: #{parsed_json}",e)
     end
 
+    # Use placeholder image if empty!
+    image = "http://news-labs-events-prototype.herokuapp.com/images/event/event-placeholder.jpeg" if image.empty?
+
     triples = [
       {
         :subject => subject_uri,        
@@ -67,7 +70,7 @@ class Blender
         :object => RDF::Literal.new(description)
       },
       {
-        :subject => subject_uri,        
+        :subject => subject_uri,     
         :predicate => image_uri,        
         :object => RDF::URI.new(image)  
       }
