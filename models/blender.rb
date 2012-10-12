@@ -43,7 +43,7 @@ class Blender
 
     title_uri = RDF::URI.new("http://purl.org/dc/terms/title")
     description_uri = RDF::URI.new("http://purl.org/dc/terms/abstract") 
-    image_uri = RDF::URI.new("http://purl.org/dc/dcmitype/Image")
+    image_uri = RDF::URI.new("http://purl.org/dc/dcmitype/image")
 
     title = description = image = ""
 
