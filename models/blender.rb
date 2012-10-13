@@ -70,26 +70,15 @@ class Blender
           excluded = true if statement.predicate.to_s == predicate
         end
 
-        # Events on juicer articles carry the tags/about predicate
-        # ... so we're going to fix that
         if statement.predicate == "http://data.press.net/ontology/tag/about" and
            statement.object.to_s.include? "juicer.responsivenews.co.uk/events/"
          
-           fix_juicer_about_statement(statement)
            excluded = false
         end
 
         rdf_graph.insert statement if not excluded
       end
     end
-  end
-
-  private 
-  def fix_juicer_about_statement(statement)
-    id = statement.object.to_s.split('/').last
-    blender_event = RDF::URI.new("http://bbc-blender.herokuapp.com/events/#{id}")
-
-    statement.object = blender_event
   end
 
   private 
