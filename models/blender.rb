@@ -1,3 +1,7 @@
+require_relative('../mixin/extractors/juicer_json_content_triples.rb')
+require_relative('../mixin/extractors/juicer_json_agent_triples.rb')
+require_relative('../mixin/extractors/juicer_json_place_triples.rb')
+
 class Blender
   require 'rdf'
   require 'rdf/rdfxml'
@@ -7,6 +11,7 @@ class Blender
   include RDF
   include Loggable
   include Cacheable
+  include JuicerJsonTripleExtractors
 
   def blend(resources)
     rdf_graph = RDF::Graph.new
@@ -17,8 +22,8 @@ class Blender
         insert_rdfxml_into_graph(rdf_graph,resource[:rdfxml])
       end
       
-      if resource.has_key? :json
-        insert_json_into_graph(rdf_graph,resource[:json])
+      if resource.has_key? :article_json
+        insert_article_json_into_graph(rdf_graph,resource[:article_json])
       end
 
     end
@@ -37,59 +42,59 @@ class Blender
   end 
 
   private 
-  def insert_json_into_graph(rdf_graph,json)
+  def insert_article_json_into_graph(rdf_graph,json)
     parsed_json = JSON.parse(json)
+    content_triples = ExtractContentTriples.extract(parsed_json)
+    agent_triples = ExtractAgentTriples.extract(parsed_json)
+    place_triples = ExtractPlaceTriples.extract(parsed_json)
 
-    subject_uri = RDF::URI.new(parsed_json["article"]["url"])
-    abstract_uri = RDF::URI.new("http://purl.org/dc/terms/abstract") 
-    description_uri = RDF::URI.new("http://purl.org/dc/terms/description")
-    image_uri = RDF::URI.new("http://purl.org/dc/dcmitype/image")
-
-    abstract = image = description = ""
-
-    begin
-      abstract = parsed_json["article"]["description"]
-      description = parsed_json["article"]["full_data"]["body"]
-      image = parsed_json["article"]["image"]["origin"] 
-    rescue Exception => e
-      log("Error parsing JSON: #{parsed_json}",e)
-    end
-
-    # Use placeholder image if empty!
-    image = "http://news-labs-events-prototype.herokuapp.com/images/event/event-placeholder.jpeg" if image.empty?
-
-    triples = [
-     {
-        :subject => subject_uri,        
-        :predicate => abstract_uri,  
-        :object => RDF::Literal.new(abstract)
-      },
-      {
-        :subject => subject_uri,     
-        :predicate => image_uri,        
-        :object => RDF::URI.new(image)  
-      },
-      {
-        :subject => subject_uri,     
-        :predicate => description_uri,
-        :object => RDF::Literal.new(description)  
-      }
-    ] 
-
-    append_triples(rdf_graph,triples)
+    append_triples(rdf_graph,content_triples)
+    append_triples(rdf_graph,agent_triples)
+    append_triples(rdf_graph,place_triples)
   end
 
   private
   def insert_rdfxml_into_graph(rdf_graph,rdfxml)
+
+    excluded_predicates = [
+      "http://data.press.net/ontology/tag/isTaggedWith",
+      "http://data.press.net/ontology/tag/mentions",
+      "http://data.press.net/ontology/tag/about",
+      "http://purl.org/dc/terms/description"
+    ]
+
     RDF::Reader.for(:rdfxml).new(rdfxml) do |reader|
       reader.each_statement do | statement |
-        rdf_graph.insert statement
+        excluded = false
+        excluded_predicates.each do | predicate |
+          excluded = true if statement.predicate.to_s == predicate
+        end
+
+        # Events on juicer articles carry the tags/about predicate
+        # ... so we're going to fix that
+        if statement.predicate == "http://data.press.net/ontology/tag/about" and
+           statement.object.to_s.include? "juicer.responsivenews.co.uk/events/"
+         
+           fix_juicer_about_statement(statement)
+           excluded = false
+        end
+
+        rdf_graph.insert statement if not excluded
       end
     end
   end
 
   private 
+  def fix_juicer_about_statement(statement)
+    id = statement.object.to_s.split('/').last
+    blender_event = RDF::URI.new("http://bbc-blender.herokuapp.com/events/#{id}")
+
+    statement.object = blender_event
+  end
+
+  private 
   def append_triples(rdf_graph,triples)
+    return if triples.nil?
     triples.each do | triple |
       rdf_graph.insert statement(triple)
     end

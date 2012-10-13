@@ -39,11 +39,11 @@ module WebmockHelpers
     "http://www.bbc.co.uk/news/#{article_id}"
   end
 
-  def article_id
-    1
+  def dbpedia_id 
+   "dbpedia_id" 
   end
 
-  def person_id
+  def article_id
     1
   end
 

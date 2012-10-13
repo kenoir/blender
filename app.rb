@@ -38,4 +38,12 @@ class Application < Sinatra::Base
     @rdfxml = Application.controller.get(:article,id)
   end
 
+  get '/people/:id' do | id |
+    @rdfxml = Application.controller.get(:people,id)
+  end
+
+  get '/places/:id' do | id |
+    @rdfxml = Application.controller.get(:places,id)
+  end
+
 end

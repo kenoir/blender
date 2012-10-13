@@ -1,5 +1,7 @@
-require_relative('../models/json_loader.rb')
-require_relative('../models/rdf_loader.rb')
+require_relative('../models/juicer_json_loader.rb')
+require_relative('../models/juicer_rdf_loader.rb')
+require_relative('../models/incubator_rdf_loader.rb')
+
 require_relative('../models/blender.rb')
 
 class ResourceController
@@ -8,25 +10,33 @@ class ResourceController
   attr_accessor :rdf_loader, :resource_uri
 
   def get(type,id)
-    @rdf_loader = JuicerRDFLoader.new
-    @json_loader = JuicerJSONLoader.new
+    @juicer_rdf_loader = JuicerRDFLoader.new
+    @juicer_json_loader = JuicerJSONLoader.new
+    @incubator_rdf_loader = IncubatorRDFLoader.new
+
     @blender = Blender.new
 
     resources = []
 
     case type
     when :identifier
-      rdf = @rdf_loader.get_identifer(id)
+      rdf = @juicer_rdf_loader.get_identifer(id)
       resources.push(:rdfxml => rdf)
     when :event
-      rdf = @rdf_loader.get_event(id)
-      resources.push(:rdfxml => rdf)
+      event_rdf = @juicer_rdf_loader.get_event(id)
+      resources.push(:rdfxml => event_rdf)
     when :article
-      json = @json_loader.get_article(id)         
-      rdf = @rdf_loader.get_identifer(article_rdf_id_from_json(json))
+      article_json = @juicer_json_loader.get_article(id)         
+      article_rdf = @juicer_rdf_loader.get_identifer(article_rdf_id_from_json(article_json))
 
-      resources.push(:json => json)
-      resources.push(:rdfxml => rdf)
+      resources.push(:article_json => article_json)
+      resources.push(:rdfxml => article_rdf)
+    when :people
+      people_rdf = @incubator_rdf_loader.get_person(id)
+      resources.push(:rdfxml => people_rdf)
+    when :places
+      places_rdf = @incubator_rdf_loader.get_place(id)
+      resources.push(:rdfxml => places_rdf)
     else
       raise "Invalid resource type!"
     end
