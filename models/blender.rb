@@ -1,6 +1,7 @@
 require_relative('../mixin/extractors/juicer_json_content_triples.rb')
 require_relative('../mixin/extractors/juicer_json_agent_triples.rb')
 require_relative('../mixin/extractors/juicer_json_place_triples.rb')
+require_relative('../mixin/extractors/juicer_json_article_triples.rb')
 
 class Blender
   require 'rdf'
@@ -26,6 +27,10 @@ class Blender
         insert_article_json_into_graph(rdf_graph,resource[:article_json])
       end
 
+      if resource.has_key? :event_json
+        insert_event_json_into_graph(rdf_graph,resource[:event_json])
+      end
+
     end
 
     Blender.write(rdf_graph)
@@ -40,6 +45,15 @@ class Blender
 
     output
   end 
+
+  private
+  def insert_event_json_into_graph(rdf_graph,json)
+    parsed_json = JSON.parse(json)
+
+    article_triples = ExtractArticleTriples.extract(parsed_json)
+
+    append_triples(rdf_graph,article_triples)
+  end
 
   private 
   def insert_article_json_into_graph(rdf_graph,json)

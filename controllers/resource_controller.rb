@@ -24,10 +24,14 @@ class ResourceController
       resources.push(:rdfxml => rdf)
     when :event
       event_rdf = @juicer_rdf_loader.get_event(id)
+      event_json = @juicer_json_loader.get_event(id)
+
+      resources.push(:event_json => event_json)
       resources.push(:rdfxml => event_rdf)
     when :article
       article_json = @juicer_json_loader.get_article(id)         
-      article_rdf = @juicer_rdf_loader.get_identifer(article_rdf_id_from_json(article_json))
+      article_rdf = @juicer_rdf_loader.get_identifer(
+        article_rdf_id_from_json(article_json))
 
       resources.push(:article_json => article_json)
       resources.push(:rdfxml => article_rdf)

@@ -21,6 +21,7 @@ Feature: Blender service
     Then I should get valid Article data
 
   @juicer_event_rdfxml
+  @juicer_event_json
   Scenario: Requesting an Event
     When I request 
     """

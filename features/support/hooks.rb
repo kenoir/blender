@@ -1,5 +1,9 @@
 Before('@juicer_event_rdfxml') do
-	stub_endpoint(juicer_rdf_event_endpoint,stub_event_rdf,'application/rdf+xml')  
+  stub_endpoint(juicer_rdf_event_endpoint,stub_event_rdf,'application/rdf+xml')  
+end
+
+Before('@juicer_event_json') do
+  stub_endpoint(juicer_json_event_endpoint,stub_event_json,'application/json')  
 end
 
 Before('@juicer_article_json') do
