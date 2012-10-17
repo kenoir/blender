@@ -30,6 +30,10 @@ class Blender
         insert_rdfxml_into_graph(rdf_graph,resource[:juicer_rdfxml],excluded_predicates)
       end
 
+      if resource.has_key? :dbpedia_rdfxml
+        insert_rdfxml_into_graph(rdf_graph,resource[:dbpedia_rdfxml],[])
+      end
+
       if resource.has_key? :incubator_rdfxml
         insert_rdfxml_into_graph(rdf_graph,resource[:incubator_rdfxml],[])
       end

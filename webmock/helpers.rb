@@ -23,12 +23,12 @@ module WebmockHelpers
     File.join(File.dirname(__FILE__), '/data/article_resource.rdfxml')
   end
 
-  def stub_incubator_identifier_rdfxml_file_location
-    File.join(File.dirname(__FILE__), '/data/incubator_identifier.rdfxml')
+  def stub_dummy_rdfxml_file_location
+    File.join(File.dirname(__FILE__), '/data/dummy.rdfxml')
   end
 
-  def stub_incubator_identifier_rdfxml
-    read_from_file(stub_incubator_identifier_rdfxml_file_location)
+  def stub_dummy_rdfxml
+    read_from_file(stub_dummy_rdfxml_file_location)
   end
 
   def stub_event_json
@@ -86,10 +86,22 @@ module WebmockHelpers
   def juicer_json_article_endpoint
     "http://juicer.responsivenews.co.uk/articles/#{article_id}.json"
   end
-
-  def incubator_rdf_endpoint
-    "http://server8.incubator.bbc.co.uk:8080/openrdf-workbench/repositories/epp_test/query?infer=true&query=SELECT%20?predicate%20?y%20WHERE%20%7B%20%3Chttp://juicer.responsivenews.co.uk/events/1%3E%20?predicate%20?y.%20%7D&queryLn=SPARQL"
+  
+  def juicer_rdf_identifier_endpoint
+    "http://juicer.responsivenews.co.uk/rdf?identifier=http://dbpedia.org/resource/#{dbpedia_id}"
   end
+
+  def incubator_rdf_identifier_endpoint
+    "http://server8.incubator.bbc.co.uk:8080/openrdf-sesame/repositories/epp_test?infer=true&query=CONSTRUCT%20%7B%20%3Chttp://juicer.responsivenews.co.uk/events/1%3E%20?p%20?o%20.%20%7D%20WHERE%20%7B%20%3Chttp://juicer.responsivenews.co.uk/events/1%3E%20?p%20?o.%7D&queryLn=SPARQL"
+  end
+
+  def incubator_rdf_place_endpoint
+    "http://server8.incubator.bbc.co.uk:8080/openrdf-sesame/repositories/epp_test?infer=true&query=PREFIX%20event:%20%3Chttp://purl.org/NET/c4dm/event.owl%23%3E%0ACONSTRUCT%20%7B%20%3Chttp://dbpedia.org/resource/dbpedia_id%3E%20event:place%20?a%20.%20%7D%0AWHERE%20%7B%20%3Chttp://dbpedia.org/resource/dbpedia_id%3E%20event:place%20?a%20.%20%7D&queryLn=SPARQL"
+  end
+
+  def incubator_rdf_agent_endpoint
+    "http://server8.incubator.bbc.co.uk:8080/openrdf-sesame/repositories/epp_test?infer=true&query=PREFIX%20event:%20%3Chttp://purl.org/NET/c4dm/event.owl%23%3E%0ACONSTRUCT%20%7B%20%3Chttp://dbpedia.org/resource/dbpedia_id%3E%20event:agent%20?a%20.%20%7D%0AWHERE%20%7B%20%3Chttp://dbpedia.org/resource/dbpedia_id%3E%20event:agent%20?a%20.%20%7D&queryLn=SPARQL"
+  end 
 
   def stub_endpoint(endpoint, response, accept)
     config_stub_request
