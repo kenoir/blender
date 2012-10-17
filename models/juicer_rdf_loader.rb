@@ -2,7 +2,11 @@ require_relative('resource_loader.rb')
 
 class JuicerRDFLoader < ResourceLoader
 
-  def get_identifer(id)
+  def get_dbpedia_identifier(id)
+    get_identifier("http://dbpedia.org/resource/#{id}")
+  end
+
+  def get_identifier(id)
     get( juicer_rdf_uri(id), {:accept => "application/rdf+xml"} ) 
   end
 

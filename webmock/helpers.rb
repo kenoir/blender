@@ -23,6 +23,14 @@ module WebmockHelpers
     File.join(File.dirname(__FILE__), '/data/article_resource.rdfxml')
   end
 
+  def stub_incubator_identifier_rdfxml_file_location
+    File.join(File.dirname(__FILE__), '/data/incubator_identifier.rdfxml')
+  end
+
+  def stub_incubator_identifier_rdfxml
+    read_from_file(stub_incubator_identifier_rdfxml_file_location)
+  end
+
   def stub_event_json
     read_from_file(stub_event_json_file_location)
   end
@@ -77,6 +85,10 @@ module WebmockHelpers
 
   def juicer_json_article_endpoint
     "http://juicer.responsivenews.co.uk/articles/#{article_id}.json"
+  end
+
+  def incubator_rdf_endpoint
+    "http://server8.incubator.bbc.co.uk:8080/openrdf-workbench/repositories/epp_test/query?infer=true&query=SELECT%20?predicate%20?y%20WHERE%20%7B%20%3Chttp://juicer.responsivenews.co.uk/events/1%3E%20?predicate%20?y.%20%7D&queryLn=SPARQL"
   end
 
   def stub_endpoint(endpoint, response, accept)

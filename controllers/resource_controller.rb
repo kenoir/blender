@@ -20,27 +20,36 @@ class ResourceController
 
     case type
     when :identifier
-      rdf = @juicer_rdf_loader.get_identifer(id)
-      resources.push(:rdfxml => rdf)
+      juicer_rdf = @juicer_rdf_loader.get_identifier(id)
+      incubator_rdf = @incubator_rdf_loader.get_identifier(id)
+
+      resources.push(:juicer_rdfxml => juicer_rdf)
+      resources.push(:incubator_rdfxml => incubator_rdf)
     when :event
       event_rdf = @juicer_rdf_loader.get_event(id)
       event_json = @juicer_json_loader.get_event(id)
 
       resources.push(:event_json => event_json)
-      resources.push(:rdfxml => event_rdf)
+      resources.push(:juicer_rdfxml => event_rdf)
     when :article
       article_json = @juicer_json_loader.get_article(id)         
-      article_rdf = @juicer_rdf_loader.get_identifer(
+      article_rdf = @juicer_rdf_loader.get_identifier(
         article_rdf_id_from_json(article_json))
 
       resources.push(:article_json => article_json)
-      resources.push(:rdfxml => article_rdf)
+      resources.push(:juicer_rdfxml => article_rdf)
     when :people
+      #dbpedia_rdf = @juicer_rdf_loader.get_dbpedia_identifier(id)
       people_rdf = @incubator_rdf_loader.get_person(id)
-      resources.push(:rdfxml => people_rdf)
+
+      #resources.push(:rdfxml => dbpedia_rdf)
+      resources.push(:incubator_rdfxml => people_rdf)
     when :places
+      #dbpedia_rdf = @juicer_rdf_loader.get_dbpedia_identifier(id)
       places_rdf = @incubator_rdf_loader.get_place(id)
-      resources.push(:rdfxml => places_rdf)
+
+      #resources.push(:rdfxml => dbpedia_rdf)
+      resources.push(:incubator_rdfxml => places_rdf)
     else
       raise "Invalid resource type!"
     end

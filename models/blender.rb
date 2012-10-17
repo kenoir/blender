@@ -19,8 +19,19 @@ class Blender
 
     resources.each do | resource |
 
-      if resource.has_key? :rdfxml
-        insert_rdfxml_into_graph(rdf_graph,resource[:rdfxml])
+      if resource.has_key? :juicer_rdfxml
+        excluded_predicates = [
+          "http://data.press.net/ontology/tag/isTaggedWith",
+          "http://data.press.net/ontology/tag/mentions",
+          "http://data.press.net/ontology/tag/about",
+          "http://purl.org/dc/terms/description"
+        ]
+
+        insert_rdfxml_into_graph(rdf_graph,resource[:juicer_rdfxml],excluded_predicates)
+      end
+
+      if resource.has_key? :incubator_rdfxml
+        insert_rdfxml_into_graph(rdf_graph,resource[:incubator_rdfxml],[])
       end
       
       if resource.has_key? :article_json
@@ -68,14 +79,8 @@ class Blender
   end
 
   private
-  def insert_rdfxml_into_graph(rdf_graph,rdfxml)
+  def insert_rdfxml_into_graph(rdf_graph,rdfxml,excluded_predicates)
 
-    excluded_predicates = [
-      "http://data.press.net/ontology/tag/isTaggedWith",
-      "http://data.press.net/ontology/tag/mentions",
-      "http://data.press.net/ontology/tag/about",
-      "http://purl.org/dc/terms/description"
-    ]
 
     RDF::Reader.for(:rdfxml).new(rdfxml) do |reader|
       reader.each_statement do | statement |

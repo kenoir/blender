@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<?xml-stylesheet type='text/xsl' href='/openrdf-workbench/transformations/tuple.xsl'?>
+<sparql xmlns='http://www.w3.org/2005/sparql-results#' xmlns:q='http://www.openrdf.org/schema/qname#'>
+  <head>
+    <variable name='predicate'/>
+    <variable name='y'/>
+    <link href='info'/>
+  </head>
+  <results ordered='false' distinct='false'>
+    <result>
+      <binding name='predicate'>
+        <uri q:qname='rdf:type'>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name='y'>
+        <uri>http://data.press.net/ontology/event/Event</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name='predicate'>
+        <uri q:qname='dc-term:title'>http://purl.org/dc/terms/title</uri>
+      </binding>
+      <binding name='y'>
+        <literal>Hitler postpones the invasion of Britain</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name='predicate'>
+        <uri q:qname='dc:description'>http://purl.org/dc/elements/1.1/description</uri>
+      </binding>
+      <binding name='y'>
+        <literal>
+                        The RAF had denied the Luftwaffe air superiority over the south of England. Now Hitler could not invade Britain and, on 17 September 1940, he postponed Operation Sealion.
+
+Photo: Goering, sixth from right, and other German officers look out across the English Channel towards Dover on 1 July 1940. It was as close as they would get to invading. (IWM HU 1185)
+
+                                                        
+                                                                                        
+                                                        
+                                                                Features in:
+                                                                The Battle of Britain
+                                                        
+                                                        
+                                                
+                                                                                        
+                                        </literal>
+      </binding>
+    </result>
+    <result>
+      <binding name='predicate'>
+        <uri>http://purl.org/dc/dcmitype/Image</uri>
+      </binding>
+      <binding name='y'>
+        <uri>http://static.bbc.co.uk/history/img/ic/640/images/resources/events/hitler_postpones_the_invasion_of_britain.jpg</uri>
+      </binding>
+    </result>
+  </results>
+</sparql>
+
