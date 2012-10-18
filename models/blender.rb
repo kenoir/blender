@@ -27,7 +27,10 @@ class Blender
           "http://purl.org/dc/terms/description"
         ]
 
-        insert_rdfxml_into_graph(rdf_graph,resource[:juicer_rdfxml],excluded_predicates)
+        insert_rdfxml_into_graph(
+          rdf_graph,
+          resource[:juicer_rdfxml],
+          excluded_predicates)
       end
 
       if resource.has_key? :dbpedia_rdfxml

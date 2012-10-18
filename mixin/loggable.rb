@@ -1,6 +1,8 @@
 module Loggable
 
   def log(title,e)
+    return
+
     if Application.environment.to_s == "development"
       return
     end

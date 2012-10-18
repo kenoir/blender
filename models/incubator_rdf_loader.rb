@@ -3,13 +3,8 @@ require_relative('resource_loader.rb')
 class IncubatorRDFLoader < ResourceLoader
   require 'open-uri'
 
-  def get_person(id)  
-    value = get(incubator_query_uri(URI::encode( agent_query(id))),
-        {:accept => "application/rdf+xml"})
-  end
-
-  def get_place(id)
-    value = get(incubator_query_uri(URI::encode( place_query(id))),
+  def get_learn_resources(id)
+    get(incubator_query_uri(URI::encode( learn_about_query(id))),
         {:accept => "application/rdf+xml"})
   end
 
@@ -29,16 +24,11 @@ class IncubatorRDFLoader < ResourceLoader
   end
 
   private
-  def place_query(id)
-    "PREFIX event: <http://purl.org/NET/c4dm/event.owl#>\n" +
-    "CONSTRUCT { <http://dbpedia.org/resource/#{id}> event:place ?a . }\n" +
-    "WHERE { <http://dbpedia.org/resource/#{id}> event:place ?a . }"
+  def learn_about_query(id)
+    "PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+    "PREFIX learn: <http://www.bbc.co.uk/ontologies/learn/>\n" +
+    "CONSTRUCT { ?a a learn:resource; rdf:about <http://dbpedia.org/resource/#{id}> . }\n" +
+    "WHERE { ?a rdf:about <http://dbpedia.org/resource/#{id}> . }\n"
   end
 
-  private
-  def agent_query(id)
-    "PREFIX event: <http://purl.org/NET/c4dm/event.owl#>\n" +
-    "CONSTRUCT { <http://dbpedia.org/resource/#{id}> event:agent ?a . }\n" +
-    "WHERE { <http://dbpedia.org/resource/#{id}> event:agent ?a . }"
-  end
 end

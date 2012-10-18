@@ -95,13 +95,9 @@ module WebmockHelpers
     "http://server8.incubator.bbc.co.uk:8080/openrdf-sesame/repositories/epp_test?infer=true&query=CONSTRUCT%20%7B%20%3Chttp://juicer.responsivenews.co.uk/events/1%3E%20?p%20?o%20.%20%7D%20WHERE%20%7B%20%3Chttp://juicer.responsivenews.co.uk/events/1%3E%20?p%20?o.%7D&queryLn=SPARQL"
   end
 
-  def incubator_rdf_place_endpoint
-    "http://server8.incubator.bbc.co.uk:8080/openrdf-sesame/repositories/epp_test?infer=true&query=PREFIX%20event:%20%3Chttp://purl.org/NET/c4dm/event.owl%23%3E%0ACONSTRUCT%20%7B%20%3Chttp://dbpedia.org/resource/dbpedia_id%3E%20event:place%20?a%20.%20%7D%0AWHERE%20%7B%20%3Chttp://dbpedia.org/resource/dbpedia_id%3E%20event:place%20?a%20.%20%7D&queryLn=SPARQL"
+  def incubator_rdf_learn_resources_endpoint
+    "http://server8.incubator.bbc.co.uk:8080/openrdf-sesame/repositories/epp_test?infer=true&query=PREFIX%20rdf:%3Chttp://www.w3.org/1999/02/22-rdf-syntax-ns%23%3E%0APREFIX%20learn:%20%3Chttp://www.bbc.co.uk/ontologies/learn/%3E%0ACONSTRUCT%20%7B%20?a%20a%20learn:resource;%20rdf:about%20%3Chttp://dbpedia.org/resource/dbpedia_id%3E%20.%20%7D%0AWHERE%20%7B%20?a%20rdf:about%20%3Chttp://dbpedia.org/resource/dbpedia_id%3E%20.%20%7D%0A&queryLn=SPARQL"
   end
-
-  def incubator_rdf_agent_endpoint
-    "http://server8.incubator.bbc.co.uk:8080/openrdf-sesame/repositories/epp_test?infer=true&query=PREFIX%20event:%20%3Chttp://purl.org/NET/c4dm/event.owl%23%3E%0ACONSTRUCT%20%7B%20%3Chttp://dbpedia.org/resource/dbpedia_id%3E%20event:agent%20?a%20.%20%7D%0AWHERE%20%7B%20%3Chttp://dbpedia.org/resource/dbpedia_id%3E%20event:agent%20?a%20.%20%7D&queryLn=SPARQL"
-  end 
 
   def stub_endpoint(endpoint, response, accept)
     config_stub_request
