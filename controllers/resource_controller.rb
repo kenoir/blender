@@ -39,22 +39,26 @@ class ResourceController
       resources.push(:article_json => article_json)
       resources.push(:juicer_rdfxml => article_rdf)
     when :people
+      about_json = @juicer_json_loader.get_about(id)
       dbpedia_rdf = @juicer_rdf_loader.get_dbpedia_identifier(id)
       people_rdf = @incubator_rdf_loader.get_learn_resources(id)
 
+      resources.push(:about_json => about_json)
       resources.push(:dbpedia_rdfxml => dbpedia_rdf)
       resources.push(:incubator_rdfxml => people_rdf)
     when :places
+      about_json = @juicer_json_loader.get_about(id)
       dbpedia_rdf = @juicer_rdf_loader.get_dbpedia_identifier(id)
       places_rdf = @incubator_rdf_loader.get_learn_resources(id)
 
+      resources.push(:about_json => about_json)
       resources.push(:dbpedia_rdfxml => dbpedia_rdf)
       resources.push(:incubator_rdfxml => places_rdf)
     else
       raise "Invalid resource type!"
     end
 
-    @blender.blend(resources)
+    @blender.blend(resources,id)
   end
 
   private 

@@ -14,7 +14,7 @@ class Blender
   include Cacheable
   include JuicerJsonTripleExtractors
 
-  def blend(resources)
+  def blend(resources,id)
     rdf_graph = RDF::Graph.new
 
     resources.each do | resource |
@@ -49,6 +49,10 @@ class Blender
         insert_event_json_into_graph(rdf_graph,resource[:event_json])
       end
 
+      if resource.has_key? :about_json
+        insert_about_json_into_graph(rdf_graph,resource[:about_json],id)
+      end
+
     end
 
     Blender.write(rdf_graph)
@@ -65,10 +69,21 @@ class Blender
   end 
 
   private
+  def insert_about_json_into_graph(rdf_graph,json,id)
+    parsed_json = JSON.parse(json)
+
+    uri = "http://dbpedia.org/resource/#{id}"
+    article_triples = ExtractArticleTriples.extract(uri,parsed_json)
+
+    append_triples(rdf_graph,article_triples)
+  end
+
+  private
   def insert_event_json_into_graph(rdf_graph,json)
     parsed_json = JSON.parse(json)
 
-    article_triples = ExtractArticleTriples.extract(parsed_json)
+    uri = "http://juicer.responsivenews.co.uk/events/#{parsed_json["id"]}"
+    article_triples = ExtractArticleTriples.extract(uri,parsed_json)
 
     append_triples(rdf_graph,article_triples)
   end

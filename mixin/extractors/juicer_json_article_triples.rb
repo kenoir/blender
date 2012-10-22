@@ -1,8 +1,7 @@
 module JuicerJsonTripleExtractors
   module ExtractArticleTriples
     
-    def self.extract(parsed_json)
-      uri = "http://juicer.responsivenews.co.uk/events/#{parsed_json["id"]}"
+    def self.extract(uri,parsed_json)
       subject_uri = RDF::URI.new(uri)
       predicate_uri = RDF::URI.new("http://purl.org/dc/terms/isReferencedBy")
 
