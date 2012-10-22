@@ -17,9 +17,14 @@ module JuicerJsonTripleExtractors
       begin
         abstract = parsed_json["article"]["description"]
         description = parsed_json["article"]["full_data"]["body"]
-        image = parsed_json["article"]["image"]["origin"] 
       rescue Exception => e
         #log("Error parsing JSON: #{parsed_json}",e)
+      end
+
+      begin 
+        image = parsed_json["article"]["full_data"]["image"]["origin"]
+      rescue Exception => e
+
       end
 
       # Use placeholder image if empty!
